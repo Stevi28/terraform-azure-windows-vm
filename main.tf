@@ -6,7 +6,7 @@ terraform {
         }
     }
     # This is where the state is stored. If you don't have a Storage Account, remove the backend block for the first test.
-    backend "azurerm" {}
+    # backend "azurerm" {}
 }
 
 # 1. Resource Group
