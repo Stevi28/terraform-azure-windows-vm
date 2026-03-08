@@ -141,3 +141,39 @@ resource "azurerm_bastion_host" "bastion" {
     public_ip_address_id = azurerm_public_ip.bastion_pip.id
   }
 }
+
+# 7. Windows VM (B2s, Premium SSD)
+# NIC
+resource "azurerm_network_interface" "vm_nic" {
+  name                = "vm-nic"
+  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg.name
+
+  ip_configuration {
+    name                          = "internal"
+    subnet_id                     = azurerm_subnet.vm_subnet.id
+    private_ip_address_allocation = "Dynamic"
+  }
+}
+# Virtual machine
+resource "azurerm_windows_virtual_machine" "vm" {
+  name = "win-lab-vm"
+  resource_group_name = azurerm_resource_group.rg.name
+  location = azurerm_resource_group.rg.location
+  size = "Standard_B2s"
+  admin_username = "adminuser"
+  admin_password = "Ttesting123456"
+  network_interface_ids = [azurerm_network_interface.vm_nic.id]
+
+  os_disk {
+    caching = "ReadWrite"
+    storage_account_type = "Premium_LRS" 
+  }
+
+  source_image_reference {
+    publisher = "MicrosoftWindowsServer"
+    offer = "WindowsServer"
+    sku = "2025-datacenter-azure-edition"
+    version = "latest"
+  }
+}
