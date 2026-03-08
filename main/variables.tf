@@ -1,9 +1,9 @@
 variable "vm_nsg_rules" {
     type = list(object({
-        name = string
-        priority = number
-        port = list(string)
-        source = string
+        name        = string
+        priority    = number
+        port        = list(string)
+        source      = string
         destination = string
     }))
     default = [
@@ -13,10 +13,10 @@ variable "vm_nsg_rules" {
 
 variable "bastion_inbound_nsg_rules" {
     type = list(object({
-        name = string
+        name     = string
         priority = number
-        port = string
-        source = string
+        port     = string
+        source   = string
     }))
     default = [
         { name = "AllowtoInternet", priority = 100, port = "443", source = "Internet" },
@@ -27,9 +27,9 @@ variable "bastion_inbound_nsg_rules" {
 
 variable "bastion_outbound_nsg_rules" {
     type = list(object({
-        name = string
-        priority = number
-        port = list(string)
+        name        = string
+        priority    = number
+        port        = list(string)
         destination = string
     }))
     default = [
@@ -37,4 +37,10 @@ variable "bastion_outbound_nsg_rules" {
         { name = "AllowAzureCloud", priority = 140, port = ["443"], destination = "AzureCloud" },
         { name = "AllowSessionInfo", priority = 150, port = ["80"], destination = "Internet" }
     ]
+}
+
+variable "admin_password" {
+    description = "The password for the Windows VM admin user"
+    type        = string
+    sensitive   = true # hides the value from Terraform logs
 }
