@@ -22,18 +22,13 @@ jobs:
       uses: hashicorp/setup-terraform@v2
 
     - name: Terraform Init
-      run: terraform init -force-copy
+      working-directory: main
+      run: terraform init 
 
-    - name: Import Resource Group
-      run: |
-         terraform state show azurerm_resource_group.rg 2>/dev/null || terraform import azurerm_resource_group.rg /subscriptions/$ARM_SUBSCRIPTION_ID/resourceGroups/rg-lab-responsibility
-
-    - name: Import Storage Account
-      run: |
-          terraform state show data.azurerm_storage_account.terraform_state 2>/dev/null || terraform import azurerm_storage_account.terraform_state /subscriptions/$ARM_SUBSCRIPTION_ID/resourceGroups/rg-lab-responsibility/providers/Microsoft.Storage/storageAccounts/sttfstate2026weu28
-    
     - name: Terraform Plan
+      working-directory: main
       run: terraform plan
 
     - name: Terraform Apply
+      working-directory: main
       run: terraform apply -auto-approve
