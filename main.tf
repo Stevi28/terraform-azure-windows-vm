@@ -116,7 +116,7 @@ resource "azurerm_subnet_network_security_group_association" "bastion_assoc" {
 
 # 4. Storage account for terraform state
 resource "azurerm_storage_account" "terraform_state" {
-    name = "sttfstate2026"
+    name = "sttfstate2026weu28"
     resource_group_name = azurerm_resource_group.rg.name
     location = azurerm_resource_group.rg.location
     account_tier = "Standard"
