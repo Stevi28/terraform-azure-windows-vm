@@ -9,6 +9,10 @@ terraform {
     # backend "azurerm" {}
 }
 
+provider "azurerm" {
+    features {}
+}
+
 # 1. Resource Group
 resource "azurerm_resource_group" "rg" {
     name = "rg-lab-responsibility"
