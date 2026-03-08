@@ -6,12 +6,12 @@ terraform {
         }
     }
     # This is where the state is stored. If you don't have a Storage Account, remove the backend block for the first test.
-#    backend "azurerm" {
-#        resource_group_name = "rg-lab-responsibility"
-#        storage_account_name = "sttfstate2026weu28"
-#        container_name = "tfstate"
-#        key = "terraform.tfstate"
-#    }
+    backend "azurerm" {
+        resource_group_name = "rg-lab-responsibility"
+        storage_account_name = "sttfstate2026weu28"
+        container_name = "tfstate"
+        key = "terraform.tfstate"
+    }
 }
 
 provider "azurerm" {
