@@ -176,7 +176,6 @@ resource "azurerm_windows_virtual_machine" "vm" {
     sku       = "2025-datacenter-azure-edition"
     version   = "latest"
   }
-  # For this image sku -> Hotpatch-compatible image
-  patch_mode          = "AutomaticByPlatform"
-  hotpatching_enabled = true
+  # For this image sku -> PATCH MODE
+  patch_mode          = "AutomaticByOS"
 }
