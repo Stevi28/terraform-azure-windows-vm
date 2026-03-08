@@ -59,7 +59,7 @@ resource "azurerm_network_security_group" "vm_nsg" {
             access = "Allow"
             protocol = "Tcp"
             source_port_range = "*"
-            destination_port_range = security_rule.value.port
+            destination_port_ranges = security_rule.value.port
             source_address_prefix = security_rule.value.source # only from bastion subnet
             destination_address_prefix = security_rule.value.destination
         }
@@ -96,7 +96,7 @@ resource "azurerm_network_security_group" "bastion_nsg" {
             access = "Allow"
             protocol = "Tcp"
             source_port_range = "*"
-            destination_port_range = security_rule.value.port
+            destination_port_ranges = security_rule.value.port
             source_address_prefix = "*"
             destination_address_prefix = security_rule.value.destination
         }
