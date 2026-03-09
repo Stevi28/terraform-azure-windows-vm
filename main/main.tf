@@ -214,3 +214,18 @@ resource "azurerm_windows_virtual_machine" "vm" {
     version   = "latest"
   }
 }
+
+# Autoshutdown the VM after 20:00
+resource "azurerm_dev_test_global_vm_shutdown_schedule" "auto_shutdown" {
+  virtual_machine_id = azurerm_windows_virtual_machine.vm.id
+  location = azurerm_resource_group.rg.location
+  enabled = true
+
+  # Shutdown time
+  daily_recurrence_time = "2000"
+  timezone = "GTB Standard Time" # Greece/Cyprus
+
+  notification_settings {
+    enabled = false # true only if you want to get notified before shutdown
+  }
+}
