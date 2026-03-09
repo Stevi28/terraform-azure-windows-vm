@@ -17,11 +17,12 @@ The deployment includes the following Azure resources:
 
 ##  Repository Structure
 
+```
 ├── bootstrap/          # Initial setup for remote state storage
 │   └── main.tf         # Creates the Storage Account & Container
 └── main/               # Core infrastructure deployment
     └── main.tf         # VNet, Bastion, Key Vault, VM, and NSGs
-
+```
 
 ## Deployment Guide
 
