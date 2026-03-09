@@ -31,9 +31,12 @@ Ensure your Terraform state is stored securely in Azure:
 2. Run `terraform init` and `terraform apply`.
 
 ### 2. Deploy Core Infrastructure
-1. Navigate to `/main`.
-2. Ensure your backend configuration points to the storage created in the bootstrap step.
-3. The GitHub Actions pipeline will automatically handle the deployment upon every `git push`.
+This project uses GitHub Actions for automated deployments.
+1. **Create a Feature Branch**: Never work directly on `main`. Create a new branch: `git checkout -b feature-my-update`.
+2. **Commit & Push**: Make your changes to the `/main` directory and push your branch to GitHub.
+3. **Open a Pull Request**: Submit a Pull Request (PR) to merge your changes into `main`.
+4. **Automated Validation**: Once the PR is opened, the GitHub Actions pipeline will trigger a `terraform plan` to validate your changes.
+5. **Merge**: Once approved and merged into `main`, the pipeline will automatically execute `terraform apply` to deploy your infrastructure.
 
 ## Security & Secrets
 Sensitive data such as VM admin credentials are managed via **Azure Key Vault**. This setup ensures that secrets are not exposed in plaintext and are handled securely by the Service Principal during deployment.
